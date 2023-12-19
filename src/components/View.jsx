@@ -24,7 +24,7 @@ export const View = () => {
                       <img width={150} src={product.image} alt="" />
                       <h3>{product.price}$</h3>
                       <p>{product.category}</p> 
-                      <button onClick={() => dispatch({...addToCart(), payload:{...addToCart().payload, id: product.id}})}>
+                      <button onClick={ () => dispatch( addToCart(product.id) ) }>
                         add to cart
                       </button>
                 </div>

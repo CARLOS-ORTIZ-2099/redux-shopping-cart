@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { removeAll, removeOneProduct, removeProduct } from "../actions/shoopingCartActions"
+import { clearCart, removeProduct } from "../actions/shoopingCartActions"
 
 export const Cart = () => {
 
   const selectCart = state => state.shoppingcartreducer 
-  const cart = useSelector(selectCart)
+  const {cart} = useSelector(selectCart)
   const dispatch = useDispatch()  
 
   console.log(cart)  
@@ -20,18 +20,18 @@ export const Cart = () => {
                         <h2>{product.name}</h2> 
                         <img width={150} src={product.image} alt="" />
                         <h3>{product.price}$</h3>
-                        <p>x {product.quantity}</p> 
+                        <p> X {product.quantity}</p> 
                         <p>{product.total}</p>
-                        <button onClick={() => dispatch({...removeOneProduct(), payload:{...removeOneProduct().payload, id: product.id}})}>
+                        <button onClick={ () => dispatch( removeProduct(product.id) ) }>
                             delete one
                         </button>
-                        <button onClick={() => dispatch({...removeProduct(), payload: {...removeProduct().payload, id:product.id}})}>delete all</button>
+                        <button onClick={ () => dispatch( removeProduct(product.id, true) ) }>delete all</button>
                     </div>
                 ))
             }
         </section>
         {
-            cart.length >=1 && <button onClick={() => dispatch(removeAll())}>empty cart</button>
+            cart.length >=1 && <button onClick={() => dispatch(clearCart())}>empty cart</button>
         }
     </div>
   )
